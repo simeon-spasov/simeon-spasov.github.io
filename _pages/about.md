@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "👋🏼 Welcome!"
+title: "👋🏼 Hello, Hola, 你好, Привет, Namaste!"
 author_profile: true
 redirect_from: 
   - /about/
@@ -8,26 +8,24 @@ redirect_from:
 ---
 ## 🌍 Welcome to My World!
 
-👨🏻‍🔬 I'm a Machine Learning Scientist fascinated by the nexus of machine learning, health, and biology. I love working in academia and its intersection with industry, where I can bring ML innovations from theory to practical applications.
+👨🏻‍🔬 I'm a Machine Learning Scientist fascinated by the nexus of machine learning, health, and biology. I love working in academia and at the intersection with industry, where I can bring ML innovations from theory to practical applications.
 
 🧬 Currently, I am developing scalable causal inference methods especially applicable to genomics data at [DZNE](https://www.dzne.de/en/research/research-areas/population-health-sciences/forschungsgruppen/mukherjee/research-areasfocus/). My journey has taken me from leading research projects at Amazon Alexa to consulting for AI startups like [sea.dev](https://www.sea.dev/).
 
 🎓 I did my PhD in the Computer Laboratory at the University of Cambridge under [Prof. Pietro Lio](https://caraml-group.github.io/author/pietro-lio/). My work focused on parameter and structural efficiency for deep learning with biomedical applications in mind.
 
-
-
 ## 🚀 Recent Adventures in ML
 ### 🧬 Postdoc Researcher at DZNE (April 2023 - Now)
-Exploring scalable causal response predictions for genomic applications.
+Advancing scalable causal response prediction with a special focus on genomic data.
 
 ### 🤖 ML Consultant for [sea.dev](https://www.sea.dev/) (Feb - March 2024)
-Integrated temporal graph embeddings for context retrieval from knowledge graphs for a LLM application.
+Integrated temporal graph embeddings to enhance context retrieval from knowledge graphs in LLM applications.
 
 ### 🔊 Tech Lead at Amazon Alexa (April 2021 - Nov 2022)
 Led a project that increased voice production speed by 3x-5x.
 
 ### 🎓 Research Internships: Amazon Alexa & MILA
-Performed research in graph representation learning culminating in several publications. Obtained return offer from Amazon. 
+Research in graph representation learning leading to multiple publications and a return offer from Amazon.
 
 ## 🌟 Highlighted Projects & Publications
 ### Temporal Graph Embeddings and Applications to Brain Data
