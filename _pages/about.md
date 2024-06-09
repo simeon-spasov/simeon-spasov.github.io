@@ -8,7 +8,7 @@ redirect_from:
 ---
 ## 🌍 Welcome to My World!
 
-w👨🏻‍🔬 I'm a Machine Learning Scientist fascinated by the nexus of machine learning, health, and biology. I love working in academia and at the intersection with industry, where I can bring ML innovations from theory to practice.
+👨🏻‍🔬 I'm a Machine Learning Scientist fascinated by the nexus of machine learning, health, and biology. I love working in academia and at the intersection with industry, where I can bring ML innovations from theory to practice.
 
 🧬 Currently, I am developing scalable causal inference methods especially applicable to genomics data at [DZNE](https://www.dzne.de/en/research/research-areas/population-health-sciences/forschungsgruppen/mukherjee/research-areasfocus/). My journey has taken me from leading research projects at Amazon Alexa to consulting for AI startups like [sea.dev](https://www.sea.dev/).
 
