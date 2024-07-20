@@ -191,9 +191,6 @@ kramdown:
   input: GFM
   math_engine: mathjax
   syntax_highlighter: rouge
-  mathjax:
-    # Set to the current MathJax CDN
-    cdn: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
   hard_wrap: false
   auto_ids: true
   footnote_nr: 1
