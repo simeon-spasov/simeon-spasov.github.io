@@ -8,16 +8,6 @@ tags:
   - causal data generator
 ---
 
- <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-        inlineMath: [['$','$']], ['\\(','\\)']]
-      }
-    });
-  </script>
-  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> 
-
 # A Causal Graph Data Generator
 About a year ago I started my journey in causal reasoning. Initially, like many others, I struggled to fully grasp its intricacies. 
 
