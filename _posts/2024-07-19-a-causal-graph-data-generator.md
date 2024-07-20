@@ -4,8 +4,8 @@ date: 2024-07-19
 permalink: /posts/2024/07/a-causal-graph-data-generator/
 tags:
   - causal reasoning
-  - causal data generator
-  - causal inference
+  - data generator
+  - random DAGs
 ---
 
 # A Causal Graph Data Generator
@@ -38,7 +38,7 @@ In an SCM, the causal relationships between variables are represented through th
 
 `RandomCausalGraphs` supports two types of random DAGs - Erdos-Renyi (ER) and Barabasi-Albert (SF) graphs. Under the hood the library relies on networkx to generate the graphs themselves, but we ensure acyclicity by orienting the edges from lower-numbered to higher-numbered nodes.
 
-![Causal Graph Visualization](../images/random_dag.png)
+![Causal Graph Visualization](/images/random_dag.png)
 
 Above is an example Erdos-Renyi (ER) random DAG with 20 nodes generated with `RandomCausalGraphs`.  
 
@@ -135,7 +135,7 @@ Let's see what this means in practical terms. In the example above, we intervene
 
 On the other hand, the causal effect will propagate to the descendants of node 10 after intervention. The Random ER graph visualization figure above shows the causal graph for this example, and we find node 10 has two descendants: nodes 15 and 18. We choose to inspect the samples of node 15 between \( X \) and \( X_{\text{intervened}} \), and expect to see a difference.
 
-![Observational vs Interventional](../images/obs_vs_int.png)
+![Observational vs Interventional](/images/obs_vs_int.png)
 
 And indeed, the histogram of values for the ancestor node 3 matches perfectly between the observational \( X \) and interventional \( X_{\text{intervened}} \) datasets, while they are noticeably different for the descendant node.
 
