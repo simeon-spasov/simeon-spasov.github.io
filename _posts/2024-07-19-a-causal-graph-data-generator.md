@@ -4,16 +4,19 @@ date: 2024-07-19
 permalink: /posts/2024/07/a-causal-graph-data-generator/
 tags:
   - causal reasoning
-  - data generator
-  - random DAGs
+  - causal inference
+  - causal data generator
 ---
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
-  });
-</script>
-<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+ <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']], ['\\(','\\)']]
+      }
+    });
+  </script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> 
 
 # A Causal Graph Data Generator
 About a year ago I started my journey in causal reasoning. Initially, like many others, I struggled to fully grasp its intricacies. 
