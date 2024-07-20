@@ -4,8 +4,8 @@ date: 2024-07-19
 permalink: /posts/2024/07/a-causal-graph-data-generator/
 tags:
   - causal reasoning
-  - causal inference
-  - causal data generator
+  - data generator
+  - random DAGs
 ---
 
 <script type="text/x-mathjax-config">
@@ -14,7 +14,6 @@ tags:
   });
 </script>
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
 
 # A Causal Graph Data Generator
 About a year ago I started my journey in causal reasoning. Initially, like many others, I struggled to fully grasp its intricacies. 
@@ -46,7 +45,7 @@ In an SCM, the causal relationships between variables are represented through th
 
 `RandomCausalGraphs` supports two types of random DAGs - Erdos-Renyi (ER) and Barabasi-Albert (SF) graphs. Under the hood the library relies on networkx to generate the graphs themselves, but we ensure acyclicity by orienting the edges from lower-numbered to higher-numbered nodes.
 
-![Causal Graph Visualization](/images/random_dag.png)
+![Causal Graph Visualization](/images/causal_graph_visualization.png)
 
 Above is an example Erdos-Renyi (ER) random DAG with 20 nodes generated with `RandomCausalGraphs`.  
 
@@ -65,7 +64,7 @@ $$
 p(x_j \mid \boldsymbol{x}_{pa(j)}) = f(\boldsymbol{x}_{pa(j)}, \epsilon_j)
 $$
 
-where \(\epsilon_j\) represents a noise variable. `RandomCausalGraphs` supports both additive (\(x_j = f(\boldsymbol{x}_{pa(j)}) + \epsilon_j\)) and non-additive (\(x_j = f(\boldsymbol{x}_{pa(j)}, \epsilon_j)\)) noise models. Furthermore, we support linear, non-linear and discrete transformations for \(\f(\cdot)\): 
+where \(\epsilon_j\) represents a noise variable. `RandomCausalGraphs` supports both additive (\(x_j = f(\boldsymbol{x}_{pa(j)}) + \epsilon_j\)) and non-additive (\(x_j = f(\boldsymbol{x}_{pa(j)}, \epsilon_j)\)) noise models. Furthermore, we support linear, non-linear and discrete transformations for \(f(\cdot)\): 
 
 - **Linear SEMs**: A linear model with additive noise. The noise variable can be sampled from Gaussian ('gauss'), exponential ('exp'), Gumbel ('gumbel'), uniform ('uniform') distributions.
 - **Non-linear SEMs**: multi-layer perceptron or multiple interaction model. Both have additive noise ('mlp' or 'mim') or non-additive noise versions ('mlp-non-add' or 'mim-non-add') respectively.
