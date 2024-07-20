@@ -4,8 +4,8 @@ date: 2024-07-19
 permalink: /posts/2024/07/a-causal-graph-data-generator/
 tags:
   - causal reasoning
-  - data generator
-  - random DAGs
+  - causal data generator
+  - causal inference
 ---
 
 # A Causal Graph Data Generator
