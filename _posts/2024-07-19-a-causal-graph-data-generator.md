@@ -10,7 +10,11 @@ tags:
 # A Causal Graph Data Generator
 About a year ago I started my journey in causal reasoning. Initially, like many others, I struggled to fully grasp its intricacies. 
 
-For this reason, and because like any aspiring academic I required toy datasets for benchmarking, I decided to code up my own synthetic causal data generator. The purpose of this first post is mainly to document how to use it.
+For this reason, and because like any aspiring academic I required toy datasets for benchmarking, I decided to code up my own synthetic causal data generator.
+
+**Check out the [RandomCausalGraphs GitHub Repository](https://github.com/simeon-spasov/RandomCausalGraphs) to explore and use the synthetic causal data generator!**
+
+The purpose of this first post is mainly to document how to use it.
 
 Note this blog post does not intend to be an introduction to causal reasoning. If you are looking for this, I strongly recommend:
 
