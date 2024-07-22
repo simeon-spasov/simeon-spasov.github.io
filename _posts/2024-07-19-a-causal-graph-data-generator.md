@@ -18,7 +18,7 @@ The purpose of this first post is mainly to document how to use it.
 
 Note this blog post does not intend to be an introduction to causal reasoning. If you are looking for this, I strongly recommend:
 
-- [Causal Reasoning: Fundamentals and Machine Learning Applications](https://causalinference.gitlab.io/): A fantastic resource offering a rigorous deep dive into causal graphs, structural equations, do-calculus, identification of causal estimands, and more.
+- [Causal Reasoning: Fundamentals and Machine Learning Applications](https://causalinference.gitlab.io/): A fantastic resource offering a more formal dive into causal graphs, structural equations, do-calculus, identification of causal estimands, estimation and more.
 
 - [Causal Inference for the Brave and True](https://matheusfacure.github.io/python-causality-handbook/landing-page.html): A light-hearted booklet designed for practitioners.
 
@@ -44,7 +44,7 @@ In an SCM, the causal relationships between variables are represented through th
 
 ![Causal Graph Visualization](/images/random_dag.png)
 
-Above is an example Erdos-Renyi (ER) random DAG with 20 nodes generated with `RandomCausalGraphs`.  
+*Figure 1: An example of an Erdos-Renyi (ER) random DAG with 20 nodes generated with `RandomCausalGraphs`.*
 
 ### Structural Equations
 The joint distribution \\(p(\boldsymbol{x})\\) admits the following factorisation:
@@ -145,11 +145,12 @@ What happens when we perform hard interventions on nodes? The key point is that 
 
 How does `RandomCausalGraphs` handle this? Simply put, `RandomCausalGraphs` modifies the causal graph into the intervention DAG before simulation and uses a controlled random seed generator. This ensures that the same random processes (such as noise generation and weight assignment) are used for both the observational and interventional datasets, allowing us to calculate exact counterfactuals.
 
-Let's see what this means in practical terms. In the example above, we intervened on node 10 by setting its value to 0. Since causal effects do not propagate to ancestors, the values for node 3, for example, across the simulated samples must match between the observational samples \\( X \\) and the interventional samples \\( X_{\text{intervened}} \\).
+Let's see what this means in practical terms. In the `python` example above, we intervened on node 10 by setting its value to 0. Since causal effects do not propagate to ancestors, the values for node 3, for example, across the simulated samples must match between the observational samples \\( X \\) and the interventional samples \\( X_{\text{intervened}} \\).
 
-On the other hand, the causal effect will propagate to the descendants of node 10 after intervention. The Random ER graph visualization figure above shows the causal graph for this example, and we find node 10 has two descendants: nodes 15 and 18. We choose to inspect the samples of node 15 between \\( X \\) and \\( X_{\text{intervened}} \\), and expect to see a difference.
+On the other hand, the causal effect will propagate to the descendants of node 10 after intervention. Figure 1 above shows the causal graph for this example, and we find node 10 has two descendants: nodes 15 and 18. We choose to inspect the samples of node 15 between \\( X \\) and \\( X_{\text{intervened}} \\), and expect to see a difference.
 
 ![Observational vs Interventional](/images/obs_vs_int.png)
+*Figure 2: Comparison of observational and interventional data for an ancestor node (left) and a descendant node (right) after an intervention on node 10.*
 
 And indeed, the histogram of values for the ancestor node 3 matches perfectly between the observational \\( X \\) and interventional \\( X_{\text{intervened}} \\) datasets, while they are noticeably different for the descendant node.
 
