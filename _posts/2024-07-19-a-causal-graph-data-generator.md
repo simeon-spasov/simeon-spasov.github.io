@@ -62,9 +62,32 @@ where \\(\epsilon_j\\) represents a noise variable.
 ### SEMs in `RandomCausalGraphs`
 `RandomCausalGraphs` supports both additive.
 
+### Inline Equations Test
+
+This is an inline equation example: \\(a^2 + b^2 = c^2\\).
+
+This is another inline equation example: \\(x_j = f(\boldsymbol{x}_{pa(j)}) + \epsilon_j\\).
+
+Yet another inline equation example: \\(x_j = f(\boldsymbol{x}_{pa(j)}, \epsilon_j)\\).
+
+### Display Equations Test
+
+Here is a display equation:
+
+$$
+E = mc^2
+$$
+
+Another display equation:
+
+$$
+x_j = f(\boldsymbol{x}_{pa(j)}) + \epsilon_j
+$$
+
 Another try for inline equation: \\( x_j = f(\boldsymbol{x}_{pa(j)}) + \epsilon_j \\) and non-additive \\( x_j = f(\boldsymbol{x}_{pa(j)}, \epsilon_j) \\) noise models. Furthermore, we support linear, non-linear and discrete transformations for \\( f(\cdot) \\).
 
 Here, \\( pa(x_j) \\) indicates the parent set of node \\( j \\) within \\( G \\), with \\( \boldsymbol{x}_{pa(j)} \\) forming a vector encapsulating the parents' values.
+
 
 - **Linear SEMs**: A linear model with additive noise. The noise variable can be sampled from Gaussian ('gauss'), exponential ('exp'), Gumbel ('gumbel'), uniform ('uniform') distributions.
 - **Non-linear SEMs**: multi-layer perceptron or multiple interaction model. Both have additive noise ('mlp' or 'mim') or non-additive noise versions ('mlp-non-add' or 'mim-non-add') respectively.
