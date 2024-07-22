@@ -64,8 +64,10 @@ where \\(\epsilon_j\\) represents a noise variable.
 
 ### Inline Equations Test
 
-We support both additive \\(x_j = f(\boldsymbol{x}_{pa(j)}) + \epsilon_j\\) 
+We support both additive \\(x_j = f(\boldsymbol{x}_{pa(j)}) + \epsilon_j\\)
+
 and non-additive: \\(x_j = f(\boldsymbol{x}_{pa(j)}, \epsilon_j)\\) noise models.
+
 Furthermore, we support linear, non-linear and discrete transformations for \\( f(\cdot) \\).
 
 ### Display Equations Test
