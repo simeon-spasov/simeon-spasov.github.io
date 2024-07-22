@@ -120,7 +120,9 @@ X = model.simulate_sem(n_samples, noise_scale=noise_scale)  # Output shape: (n_s
 ### Performing do-interventions
 A strength of the SCM framework over and above providing a data-generating model for the native, observational case, lies in its ability to modify the underlying model, thereby permitting generation of output under, e.g., a hard intervention on a specific variable \\(x_j'\\).  
 
-This process entails replacing its conditional distribution \\( p(x_j' | \boldsymbol{x}_{pa(j)}) \\) with an alternate distribution, such as a delta function \\(\delta(x_j' = x)\\), enforcing \\(x_j'\\) to assume the fixed value \\(x\\). 
+This process entails replacing its conditional distribution \\( p(x_j' | \boldsymbol{x}_{pa(j)}) \\).
+
+with an alternate distribution, such as a delta function \\(\delta(x_j' = x)\\), enforcing \\(x_j'\\) to assume the fixed value \\(x\\). 
 
 Note the value \\(x_j'\\) assumes is no longer dependent on its parents, meaning these edges have been deleted in the intervention DAG \\( G_{do(x_j' = x)} \\).
 
