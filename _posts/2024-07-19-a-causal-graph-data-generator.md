@@ -120,9 +120,7 @@ X = model.simulate_sem(n_samples, noise_scale=noise_scale)  # Output shape: (n_s
 ### Performing do-interventions
 A strength of the SCM framework over and above providing a data-generating model for the native, observational case, lies in its ability to modify the underlying model, thereby permitting generation of output under, e.g., a hard intervention on a specific variable \\(x_j'\\).  
 
-This process entails replacing its conditional distribution \\( p(x_j' \| \boldsymbol{x}_{pa(j)}) \\).
-
-with an alternate distribution, such as a delta function \\(\delta(x_j' = x)\\), enforcing \\(x_j'\\) to assume the fixed value \\(x\\). 
+This process entails replacing its conditional distribution \\( p(x_j' \| \boldsymbol{x}_{pa(j)}) \\) with an alternate distribution, such as a delta function \\(\delta(x_j' = x)\\), enforcing \\(x_j'\\) to assume the fixed value \\(x\\). 
 
 Note the value \\(x_j'\\) assumes is no longer dependent on its parents, meaning these edges have been deleted in the intervention DAG \\( G_{do(x_j' = x)} \\).
 
@@ -137,7 +135,7 @@ intervened_node = 10
 X_intervened = model.simulate_sem(n_samples=n_samples, intervened_node=intervened_node, intervened_value=intervened_value, noise_scale=noise_scale)
 ```
 
-### Computing the Counterfactual
+## Computing the Counterfactual
 
 What happens when we perform hard interventions on nodes? The key point is that the underlying causal graph changes after the intervention. This means the observational distribution \\( p(\boldsymbol{x}) \\) and the interventional distribution \\( p_{G_{do(x_j' = x)}}(\boldsymbol{x}) \\) are different because the graph's connectivity changes!
 
@@ -151,7 +149,7 @@ On the other hand, the causal effect will propagate to the descendants of node 1
 
 And indeed, the histogram of values for the ancestor node 3 matches perfectly between the observational \\( X \\) and interventional \\( X_{\text{intervened}} \\) datasets, while they are noticeably different for the descendant node.
 
-### Computing the Average Causal Effect of an Intervention
+## Computing the Average Causal Effect of an Intervention
 To estimate the causal response under an intervention, we utilize a fitness function that calculates an outcome \\( Y \\) from the samples. This is done by computing the weighted mean of a subset of selected variables and adding Gaussian noise.
 
 ```python
