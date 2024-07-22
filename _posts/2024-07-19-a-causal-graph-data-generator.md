@@ -175,7 +175,7 @@ You can find the `fitness` function implementation in the `utils.py` file on Git
 Since each sample in the interventional dataset is a counterfactual of a matched observational sample, we can directly calculate the causal effect using the formula:
 
 $$
-E[Y(\text{do}(\text{x}_j)=0) - Y_{\text{obs}}] = \frac{1}{n_{\text{samples}}} \sum_{k=1}^{n_{\text{samples}}} \left[ Y(\text{do}(\text{x}_j)=0, k) - Y_{\text{obs}}, k \right]
+E[Y(\text{do}(\text{x}_j=0)) - Y_{\text{obs}}] = \frac{1}{n_{\text{samples}}} \sum_{k=1}^{n_{\text{samples}}} \left[ Y(\text{do}(\text{x}_j=0, k)) - Y_{\text{obs}}, k \right]
 $$
 
 This boils down to a simple mean across the samples:
