@@ -24,7 +24,7 @@ Let's dive straight into it! Here, I briefly provide some background to facilita
 
 ### Causal Graphs
 
-A structural causal model (SCM) is defined by its causal graph, that is a directed acyclic graph (DAG) \(G=(V, E)\), and a joint probability distribution \(p(\boldsymbol{x})\) over a random vector \(\boldsymbol{x} = (x_1, \ldots, x_n)\). Each node \(i \in V = \{1, \ldots, n\}\) corresponds to a random variable \(x_i\), while every edge \((i, j) \in E\) signifies a direct causal link from variable \(x_i\) to \(x_j\).
+This sentence uses `$` delimiters to show math inline:  $\sqrt{3x-1}+(1+x)^2$. A structural causal model (SCM) is defined by its causal graph, that is a directed acyclic graph (DAG) \(G=(V, E)\), and a joint probability distribution \(p(\boldsymbol{x})\) over a random vector \(\boldsymbol{x} = (x_1, \ldots, x_n)\). Each node \(i \in V = \{1, \ldots, n\}\) corresponds to a random variable \(x_i\), while every edge \((i, j) \in E\) signifies a direct causal link from variable \(x_i\) to \(x_j\).
 
 $$
 G = (V, E)
@@ -38,7 +38,7 @@ In an SCM, the causal relationships between variables are represented through th
 
 `RandomCausalGraphs` supports two types of random DAGs - Erdos-Renyi (ER) and Barabasi-Albert (SF) graphs. Under the hood the library relies on networkx to generate the graphs themselves, but we ensure acyclicity by orienting the edges from lower-numbered to higher-numbered nodes.
 
-![Causal Graph Visualization](../images/random_dag.png)
+![Causal Graph Visualization](/images/random_dag.png)
 
 Above is an example Erdos-Renyi (ER) random DAG with 20 nodes generated with `RandomCausalGraphs`.  
 
@@ -135,7 +135,7 @@ Let's see what this means in practical terms. In the example above, we intervene
 
 On the other hand, the causal effect will propagate to the descendants of node 10 after intervention. The Random ER graph visualization figure above shows the causal graph for this example, and we find node 10 has two descendants: nodes 15 and 18. We choose to inspect the samples of node 15 between \( X \) and \( X_{\text{intervened}} \), and expect to see a difference.
 
-![Observational vs Interventional](../images/obs_vs_int.png)
+![Observational vs Interventional](/images/obs_vs_int.png)
 
 And indeed, the histogram of values for the ancestor node 3 matches perfectly between the observational \( X \) and interventional \( X_{\text{intervened}} \) datasets, while they are noticeably different for the descendant node.
 
