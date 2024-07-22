@@ -64,9 +64,13 @@ where \\(\epsilon_j\\) represents a noise variable.
 
 ### Inline Equations Test
 
-This is an inline equation example: \\(a^2 + b^2 = c^2\\).
+We support both additive: \\(a^2 + b^2 = c^2\\).
 
-We support both additive \\(x_j = f(\boldsymbol{x}_{pa(j)}) + \epsilon_j\\) and non-additive \\(x_j = f(\boldsymbol{x}_{pa(j)}, \epsilon_j)\\) noise models.
+and non-additive: \\(x_j = f(\boldsymbol{x}_{pa(j)}) + \epsilon_j\\)
+
+noise models.
+
+Yet another inline equation example: \\(x_j = f(\boldsymbol{x}_{pa(j)}, \epsilon_j)\\).
 
 ### Display Equations Test
 
