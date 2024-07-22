@@ -60,7 +60,7 @@ $$
 where \\(\epsilon_j\\) represents a noise variable.
 
 ### SEMs in `RandomCausalGraphs`
-`RandomCausalGraphs` supports both additive \\( (x_j = f(\boldsymbol{x}_{pa(j)}) + \epsilon_j) \\) and non-additive \\( (x_j = f(\boldsymbol{x}_{pa(j)}, \epsilon_j) ) \\) noise models. Furthermore, we support linear, non-linear and discrete transformations for \\( f(\cdot) \\): 
+`RandomCausalGraphs` supports both additive (\\( x_j = f(\boldsymbol{x}_{pa(j)}) + \epsilon_j \\)) and non-additive (\\(x_j = f(\boldsymbol{x}_{pa(j)}, \epsilon_j) \\)) noise models. Furthermore, we support linear, non-linear and discrete transformations for \\( f(\cdot) \\): 
 
 - **Linear SEMs**: A linear model with additive noise. The noise variable can be sampled from Gaussian ('gauss'), exponential ('exp'), Gumbel ('gumbel'), uniform ('uniform') distributions.
 - **Non-linear SEMs**: multi-layer perceptron or multiple interaction model. Both have additive noise ('mlp' or 'mim') or non-additive noise versions ('mlp-non-add' or 'mim-non-add') respectively.
@@ -113,7 +113,7 @@ X = model.simulate_sem(n_samples, noise_scale=noise_scale)  # Output shape: (n_s
 
 ### Performing do-interventions
 A strength of the SCM framework over and above providing a data-generating model for the native, observational case, lies in its ability to *modify* the underlying model, 
-thereby permitting generation of output under, e.g., a hard intervention on a specific variable \\(x_j'\\).  This process entails replacing its conditional distribution \\( p(x_j' | \boldsymbol{x}_{pa(j)}) \\) with an alternate distribution, such as a delta function \\(\delta(x_j' = x)\\), enforcing \\(x_j'\\) to assume the fixed value \\(x\\). Note the value $x_j'$ assumes is no longer dependent on its parents, meaning these edges have been deleted in the intervention DAG \\( G_{do(x_j' = x)} \\).
+thereby permitting generation of output under, e.g., a hard intervention on a specific variable \\(x_j'\\).  This process entails replacing its conditional distribution \\( p\(x_j' | \boldsymbol{x}_{pa\(j\)}) \\) with an alternate distribution, such as a delta function \\(\delta(x_j' = x)\\), enforcing \\(x_j'\\) to assume the fixed value \\(x\\). Note the value \\(x_j'\\) assumes is no longer dependent on its parents, meaning these edges have been deleted in the intervention DAG \\( G_{do\(x_j' = x\)} \\).
 
 **`RandomCausalGraphs`** allows you to perform hard interventions on individual nodes like this:
 
@@ -139,7 +139,7 @@ On the other hand, the causal effect will propagate to the descendants of node 1
 
 And indeed, the histogram of values for the ancestor node 3 matches perfectly between the observational \\( X \\) and interventional \\( X_{\text{intervened}} \\) datasets, while they are noticeably different for the descendant node.
 
-### Computing the Average Causal EffCorrect of an Intervention
+### Computing the Average Causal Effect of an Intervention
 To estimate the causal response under an intervention, we utilize a fitness function that calculates an outcome \\( Y \\) from the samples. This is done by computing the weighted mean of a subset of selected variables and adding Gaussian noise.
 
 ```python
