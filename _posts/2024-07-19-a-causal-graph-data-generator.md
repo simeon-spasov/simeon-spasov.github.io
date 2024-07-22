@@ -24,7 +24,7 @@ Let's dive straight into it! Here, I briefly provide some background to facilita
 
 ### Causal Graphs
 
-This sentence uses `$` delimiters to show math inline:  $\sqrt{3x-1}+(1+x)^2$. A structural causal model (SCM) is defined by its causal graph, that is a directed acyclic graph (DAG) \(G=(V, E)\), and a joint probability distribution \(p(\boldsymbol{x})\) over a random vector \(\boldsymbol{x} = (x_1, \ldots, x_n)\). Each node \(i \in V = \{1, \ldots, n\}\) corresponds to a random variable \(x_i\), while every edge \((i, j) \in E\) signifies a direct causal link from variable \(x_i\) to \(x_j\).
+The default delimiters of `$$...$$` and `\\[...\\]` are supported for displayed mathematics, while `\\(...\\)` should be used for in-line mathematics (ex., \\(a^2 + b^2 = c^2\\)). A structural causal model (SCM) is defined by its causal graph, that is a directed acyclic graph (DAG) \(G=(V, E)\), and a joint probability distribution \(p(\boldsymbol{x})\) over a random vector \(\boldsymbol{x} = (x_1, \ldots, x_n)\). Each node \(i \in V = \{1, \ldots, n\}\) corresponds to a random variable \(x_i\), while every edge \((i, j) \in E\) signifies a direct causal link from variable \(x_i\) to \(x_j\).
 
 $$
 G = (V, E)
