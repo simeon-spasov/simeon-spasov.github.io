@@ -7,7 +7,7 @@ tags:
   - causal data generator
 ---
 
-# A Causal Graph Data Generator
+# RandomCausalGraphs Data Generator
 About a year ago I started my journey in causal reasoning. Initially, like many others, I struggled to fully grasp its intricacies. 
 
 For this reason, and because like any aspiring academic I required toy datasets for benchmarking, I decided to code up my own synthetic causal data generator.
@@ -155,6 +155,8 @@ On the other hand, the causal effect will propagate to the descendants of node 1
 And indeed, the histogram of values for the ancestor node 3 matches perfectly between the observational \\( X \\) and interventional \\( X_{\text{intervened}} \\) datasets, while they are noticeably different for the descendant node.
 
 ## Computing the Average Causal Effect of an Intervention
+
+### Calculating the causal response
 To estimate the causal response under an intervention, we utilize a fitness function that calculates an outcome \\( Y \\) from the samples. This is done by computing the weighted mean of a subset of selected variables and adding Gaussian noise.
 
 ```python
@@ -163,15 +165,27 @@ from src.utils import fitness
 
 fitness_obs, _, _ = fitness(X, noise_std=0.1, proportion=0.1, seed=seed, strategy='last_few')  # Fitness Values Shape: (n_samples,)
 fitness_int, _, _ = fitness(X_intervened, noise_std=0.1, proportion=0.1, seed=seed, strategy='last_few')
-# Calculate the causal effect of the intervention
-ATE = np.mean(fitness_int - fitness_obs)
 ```
-Ensure you use the same seed when calculating the fitness of both the observational and interventional samples. This consistency guarantees that the subset of variables used in the calculations matches.
+Ensure you use the same seed when calculating the fitness of both the observational and interventional samples. This consistency guarantees that the subset of variables used in the calculations matches. 
+
+You can find the `fitness` function implementation in the `utils.py` file on GitHub [here](https://github.com/simeon-spasov/RandomCausalGraphs/blob/main/src/utils.py#L52). Feel free to substitute with your own implementation.
+
+### The Average Causal Effect
 
 Since each sample in the interventional dataset is a counterfactual of a matched observational sample, we can directly calculate the causal effect using the formula:
 
 $$
-E[Y(\text{do}(\text{node } 10)=0) - Y_{\text{obs}}] = \frac{1}{n_{\text{samples}}} \sum_{k=1}^{n_{\text{samples}}} \left[ Y(\text{do}(\text{node } 10)=0, k) - Y_{\text{obs}}, k \right]
+E[Y(\text{do}(\text{x}_j)=0) - Y_{\text{obs}}] = \frac{1}{n_{\text{samples}}} \sum_{k=1}^{n_{\text{samples}}} \left[ Y(\text{do}(\text{x}_j)=0, k) - Y_{\text{obs}}, k \right]
 $$
 
-In our case, this boils down to a simple mean.
+This boils down to a simple mean across the samples:
+
+```python
+# Calculate the causal effect of the intervention
+ATE = np.mean(fitness_int - fitness_obs)
+```
+
+## Last Words and What's next
+Feel free to modify the 'RandomCausalGraphs' so it suits your needs!
+
+Stay tuned for next post on how to use the package to simulate gene knockout experiments. ETA: Aug. 2024.
