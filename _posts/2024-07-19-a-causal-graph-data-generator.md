@@ -24,7 +24,9 @@ Let's dive straight into it! Here, I briefly provide some background to facilita
 
 ### Causal Graphs
 
-The default delimiters of `$$...$$` and `\\[...\\]` are supported for displayed mathematics, while `\\(...\\)` should be used for in-line mathematics (ex., \\(a^2 + b^2 = c^2\\)). A structural causal model (SCM) is defined by its causal graph, that is a directed acyclic graph (DAG) \(G=(V, E)\), and a joint probability distribution \(p(\boldsymbol{x})\) over a random vector \(\boldsymbol{x} = (x_1, \ldots, x_n)\). Each node \(i \in V = \{1, \ldots, n\}\) corresponds to a random variable \(x_i\), while every edge \((i, j) \in E\) signifies a direct causal link from variable \(x_i\) to \(x_j\).
+The default delimiters of `$$...$$` and `\\[...\\]` are supported for displayed mathematics, while `\\(...\\)` should be used for in-line mathematics (ex., \\(a^2 + b^2 = c^2\\)). 
+
+A structural causal model (SCM) is defined by its causal graph, that is a directed acyclic graph (DAG) \\(G=(V, E)\\), and a joint probability distribution \\(p(\boldsymbol{x})\\) over a random vector \\(\boldsymbol{x} = (x_1, \ldots, x_n)\\). Each node \\(i \in V = \{1, \ldots, n\}\\) corresponds to a random variable \\(x_i\\), while every edge \\((i, j) \in E\\) signifies a direct causal link from variable \\(x_i\) to \(x_j\\).
 
 $$
 G = (V, E)
@@ -43,21 +45,21 @@ In an SCM, the causal relationships between variables are represented through th
 Above is an example Erdos-Renyi (ER) random DAG with 20 nodes generated with `RandomCausalGraphs`.  
 
 ### Structural Equations
-The joint distribution \(p(\boldsymbol{x})\) admits the following factorisation:
+The joint distribution \\(p(\boldsymbol{x})\\) admits the following factorisation:
 
 $$
 p(x_1, \ldots, x_n) = \prod_{j=1}^n p_j (x_j \mid \boldsymbol{x}_{pa(x_j)})
 $$
 
-Here, \(pa(j)\) indicates the parent set of node \(j\) within \(G\), with \(\boldsymbol{x}_{pa(j)}\) forming a vector encapsulating the parents' values.
+Here, \\(pa(j)\\) indicates the parent set of node \\(j\\) within \\(G\\), with \\(\boldsymbol{x}_{pa(j)}\\) forming a vector encapsulating the parents' values.
 
-We use structural equation models (SEMs) to represent the conditional distribution of a node \(x_j\) as a function of its parents, following the general form:
+We use structural equation models (SEMs) to represent the conditional distribution of a node \\(x_j\\) as a function of its parents, following the general form:
 
 $$
 p(x_j \mid \boldsymbol{x}_{pa(j)}) = f(\boldsymbol{x}_{pa(j)}, \epsilon_j)
 $$
 
-where \(\epsilon_j\) represents a noise variable. `RandomCausalGraphs` supports both additive (\(x_j = f(\boldsymbol{x}_{pa(j)}) + \epsilon_j\)) and non-additive (\(x_j = f(\boldsymbol{x}_{pa(j)}, \epsilon_j)\)) noise models. Furthermore, we support linear, non-linear and discrete transformations for \(\f(\cdot)\): 
+where \\(\epsilon_j\\) represents a noise variable. `RandomCausalGraphs` supports both additive (\\(x_j = f(\boldsymbol{x}_{pa(j)}) + \epsilon_j\\)) and non-additive (\\(x_j = f(\boldsymbol{x}_{pa(j)}, \epsilon_j)\\)) noise models. Furthermore, we support linear, non-linear and discrete transformations for \\(\f(\cdot)\\): 
 
 - **Linear SEMs**: A linear model with additive noise. The noise variable can be sampled from Gaussian ('gauss'), exponential ('exp'), Gumbel ('gumbel'), uniform ('uniform') distributions.
 - **Non-linear SEMs**: multi-layer perceptron or multiple interaction model. Both have additive noise ('mlp' or 'mim') or non-additive noise versions ('mlp-non-add' or 'mim-non-add') respectively.
@@ -110,10 +112,10 @@ X = model.simulate_sem(n_samples, noise_scale=noise_scale)  # Output shape: (n_s
 
 ### Performing do-interventions
 A strength of the SCM framework over and above providing a data-generating model for the native, observational case, lies in its ability to *modify* the underlying model, 
-thereby permitting generation of output under, e.g., a hard intervention on a specific variable \(x_j'\). 
-This process entails replacing its conditional distribution \(p(x_j' | \boldsymbol{x}_{pa(j)})\) with an alternate distribution, 
-such as a delta function \(\delta(x_j' = x)\), enforcing \(x_j'\) to assume the fixed value \(x\). 
-Note the value \(x_j'\) assumes is no longer dependent on its parents, meaning these edges have been deleted in the intervention DAG \(G_{do(x_j' = x)}\).
+thereby permitting generation of output under, e.g., a hard intervention on a specific variable \\(x_j'\\). 
+This process entails replacing its conditional distribution \\(p(x_j' | \boldsymbol{x}_{pa(j)})\\) with an alternate distribution, 
+such as a delta function \\(\delta(x_j' = x)\\), enforcing \\(x_j'\\) to assume the fixed value \\(x\\). 
+Note the value \\(x_j'\\) assumes is no longer dependent on its parents, meaning these edges have been deleted in the intervention DAG \\(G_{do(x_j' = x)}\\).
 
 For now, `RandomCausalGraphs` allows you to perform only hard interventions on individual nodes.
 
@@ -127,20 +129,20 @@ X_intervened = model.simulate_sem(n_samples=n_samples, intervened_node=intervene
 
 ### Computing the Counterfactual
 
-What happens when we perform hard interventions on nodes? The key point is that the underlying causal graph changes after the intervention. This means the observational distribution \( p(\boldsymbol{x}) \) and the interventional distribution \( p_{G_{do(x_j' = x)}}(\boldsymbol{x}) \) are different because the graph's connectivity changes!
+What happens when we perform hard interventions on nodes? The key point is that the underlying causal graph changes after the intervention. This means the observational distribution \( p(\boldsymbol{x}) \) and the interventional distribution \\( p_{G_{do(x_j' = x)}}(\boldsymbol{x}) \\) are different because the graph's connectivity changes!
 
 How does `RandomCausalGraphs` handle this? Simply put, `RandomCausalGraphs` modifies the causal graph into the intervention DAG before simulation and uses a controlled random seed generator. This ensures that the same random processes (such as noise generation and weight assignment) are used for both the observational and interventional datasets, allowing us to calculate exact counterfactuals.
 
-Let's see what this means in practical terms. In the example above, we intervened on node 10 by setting its value to 0. Since causal effects do not propagate to ancestors, the values for node 3, for example, across the simulated samples must match between the observational samples \( X \) and the interventional samples \( X_{\text{intervened}} \).
+Let's see what this means in practical terms. In the example above, we intervened on node 10 by setting its value to 0. Since causal effects do not propagate to ancestors, the values for node 3, for example, across the simulated samples must match between the observational samples \\( X \\) and the interventional samples \\( X_{\text{intervened}} \\).
 
-On the other hand, the causal effect will propagate to the descendants of node 10 after intervention. The Random ER graph visualization figure above shows the causal graph for this example, and we find node 10 has two descendants: nodes 15 and 18. We choose to inspect the samples of node 15 between \( X \) and \( X_{\text{intervened}} \), and expect to see a difference.
+On the other hand, the causal effect will propagate to the descendants of node 10 after intervention. The Random ER graph visualization figure above shows the causal graph for this example, and we find node 10 has two descendants: nodes 15 and 18. We choose to inspect the samples of node 15 between \\( X \\) and \\( X_{\text{intervened}} \\), and expect to see a difference.
 
 ![Observational vs Interventional](/images/obs_vs_int.png)
 
-And indeed, the histogram of values for the ancestor node 3 matches perfectly between the observational \( X \) and interventional \( X_{\text{intervened}} \) datasets, while they are noticeably different for the descendant node.
+And indeed, the histogram of values for the ancestor node 3 matches perfectly between the observational \\( X \\) and interventional \\( X_{\text{intervened}} \\) datasets, while they are noticeably different for the descendant node.
 
 ### Computing the Average Causal Effect of an Intervention
-To estimate the causal response under an intervention, we utilize a fitness function that calculates an outcome `Y` from the samples. This is done by computing the weighted mean of a subset of selected variables and adding Gaussian noise.
+To estimate the causal response under an intervention, we utilize a fitness function that calculates an outcome \\( Y \\) from the samples. This is done by computing the weighted mean of a subset of selected variables and adding Gaussian noise.
 
 ```python
 # Calculate fitness
@@ -155,6 +157,8 @@ Ensure you use the same seed when calculating the fitness of both the observatio
 
 Since each sample in the interventional dataset is a counterfactual of a matched observational sample, we can directly calculate the causal effect using the formula:
 
-\[ E[Y(\text{do}(\text{node } 10)=0) - Y_{\text{obs}}] = \frac{1}{n_{\text{samples}}} \sum_{k=1}^{n_{\text{samples}}} \left[ Y(\text{do}(\text{node } 10)=0, k) - Y_{\text{obs}}, k \right] \]
+$$
+E[Y(\text{do}(\text{node } 10)=0) - Y_{\text{obs}}] = \frac{1}{n_{\text{samples}}} \sum_{k=1}^{n_{\text{samples}}} \left[ Y(\text{do}(\text{node } 10)=0, k) - Y_{\text{obs}}, k \right]
+$$
 
 In our case, this boils down to a simple mean.
