@@ -24,9 +24,7 @@ Let's dive straight into it! Here, I briefly provide some background to facilita
 
 ### Causal Graphs
 
-The default delimiters of `$$...$$` and `\\[...\\]` are supported for displayed mathematics, while `\\(...\\)` should be used for in-line mathematics (ex., \\(a^2 + b^2 = c^2\\)). 
-
-A structural causal model (SCM) is defined by its causal graph, that is a directed acyclic graph (DAG) \\(G=(V, E)\\), and a joint probability distribution \\(p(\boldsymbol{x})\\) over a random vector \\(\boldsymbol{x} = (x_1, \ldots, x_n)\\). Each node \\(i \in V = \{1, \ldots, n\}\\) corresponds to a random variable \\(x_i\\), while every edge \\((i, j) \in E\\) signifies a direct causal link from variable \\(x_i\) to \(x_j\\).
+A structural causal model (SCM) is defined by its causal graph, that is a directed acyclic graph, or DAG, \\(G=(V, E)\\), and a joint probability distribution \\(p(\boldsymbol{x})\\) over a random vector \\(\boldsymbol{x} = (x_1, \ldots, x_n)\\). Each node \\(i \in V = \{1, \ldots, n\}\\) corresponds to a random variable \\(x_i\\), while every edge \\((i, j) \in E\\) signifies a direct causal link from variable \\(x_i \to x_j\\).
 
 $$
 G = (V, E)
@@ -38,7 +36,7 @@ $$
 
 In an SCM, the causal relationships between variables are represented through these directed edges, indicating the direction of causality. This framework allows for the understanding and analysis of how changes in one variable affect others within the system.
 
-`RandomCausalGraphs` supports two types of random DAGs - Erdos-Renyi (ER) and Barabasi-Albert (SF) graphs. Under the hood the library relies on networkx to generate the graphs themselves, but we ensure acyclicity by orienting the edges from lower-numbered to higher-numbered nodes.
+**`RandomCausalGraphs`** supports two types of random DAGs - **Erdos-Renyi (ER)** and **Barabasi-Albert (SF)** graphs. Under the hood the library relies on `networkx` to generate the graphs themselves, but we ensure acyclicity by orienting the edges from lower-numbered to higher-numbered nodes. Also, we explicitly check if the generated graph is in fact a DAG and is acyclic. All you need to do is provide the number of nodes and edge probability and demonstrated in the `python` snippet below on this page.
 
 ![Causal Graph Visualization](/images/random_dag.png)
 
@@ -59,7 +57,9 @@ $$
 p(x_j \mid \boldsymbol{x}_{pa(j)}) = f(\boldsymbol{x}_{pa(j)}, \epsilon_j)
 $$
 
-where \\(\epsilon_j\\) represents a noise variable. `RandomCausalGraphs` supports both additive (\\(x_j = f(\boldsymbol{x}_{pa(j)}) + \epsilon_j\\)) and non-additive (\\(x_j = f(\boldsymbol{x}_{pa(j)}, \epsilon_j)\\)) noise models. Furthermore, we support linear, non-linear and discrete transformations for \\(\f(\cdot)\\): 
+where \\(\epsilon_j\\) represents a noise variable.
+
+**`RandomCausalGraphs`** supports both additive ( \\(x_j = f(\boldsymbol{x}_{pa(j)}) + \epsilon_j\\) ) and non-additive ( \\(x_j = f(\boldsymbol{x}_{pa(j)}, \epsilon_j)\\) ) noise models. Furthermore, we support linear, non-linear and discrete transformations for \\( f(\cdot) \\): 
 
 - **Linear SEMs**: A linear model with additive noise. The noise variable can be sampled from Gaussian ('gauss'), exponential ('exp'), Gumbel ('gumbel'), uniform ('uniform') distributions.
 - **Non-linear SEMs**: multi-layer perceptron or multiple interaction model. Both have additive noise ('mlp' or 'mim') or non-additive noise versions ('mlp-non-add' or 'mim-non-add') respectively.
@@ -113,11 +113,11 @@ X = model.simulate_sem(n_samples, noise_scale=noise_scale)  # Output shape: (n_s
 ### Performing do-interventions
 A strength of the SCM framework over and above providing a data-generating model for the native, observational case, lies in its ability to *modify* the underlying model, 
 thereby permitting generation of output under, e.g., a hard intervention on a specific variable \\(x_j'\\). 
-This process entails replacing its conditional distribution \\(p(x_j' | \boldsymbol{x}_{pa(j)})\\) with an alternate distribution, 
-such as a delta function \\(\delta(x_j' = x)\\), enforcing \\(x_j'\\) to assume the fixed value \\(x\\). 
-Note the value \\(x_j'\\) assumes is no longer dependent on its parents, meaning these edges have been deleted in the intervention DAG \\(G_{do(x_j' = x)}\\).
 
-For now, `RandomCausalGraphs` allows you to perform only hard interventions on individual nodes.
+This process entails replacing its conditional distribution \\( p(x_j' | \boldsymbol{x}_{pa(j)}) \\) with an alternate distribution, such as a delta function \\(\delta(x_j' = x)\\), enforcing \\(x_j'\\) to assume the fixed value \\(x\\). Note the value $x_j'$ assumes is no longer dependent on its parents, meaning these edges have been deleted in the intervention DAG \\( G_{do(x_j' = x)} \\).
+
+
+**`RandomCausalGraphs`** allows you to perform hard interventions on individual nodes like this:
 
 ```python
 # Simulate data with an intervention on node 10, setting its value to 0
@@ -129,7 +129,7 @@ X_intervened = model.simulate_sem(n_samples=n_samples, intervened_node=intervene
 
 ### Computing the Counterfactual
 
-What happens when we perform hard interventions on nodes? The key point is that the underlying causal graph changes after the intervention. This means the observational distribution \( p(\boldsymbol{x}) \) and the interventional distribution \\( p_{G_{do(x_j' = x)}}(\boldsymbol{x}) \\) are different because the graph's connectivity changes!
+What happens when we perform hard interventions on nodes? The key point is that the underlying causal graph changes after the intervention. This means the observational distribution \\( p(\boldsymbol{x}) \\) and the interventional distribution \\( p_{G_{do(x_j' = x)}}(\boldsymbol{x}) \\) are different because the graph's connectivity changes!
 
 How does `RandomCausalGraphs` handle this? Simply put, `RandomCausalGraphs` modifies the causal graph into the intervention DAG before simulation and uses a controlled random seed generator. This ensures that the same random processes (such as noise generation and weight assignment) are used for both the observational and interventional datasets, allowing us to calculate exact counterfactuals.
 
