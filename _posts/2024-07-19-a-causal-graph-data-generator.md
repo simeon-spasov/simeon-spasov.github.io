@@ -60,7 +60,9 @@ $$
 where \\(\epsilon_j\\) represents a noise variable.
 
 ### SEMs in `RandomCausalGraphs`
-`RandomCausalGraphs` supports both additive \\( x_j = \boldsymbol{x}_{pa(j)} + \epsilon_j \\) and non-additive \\( x_j = \boldsymbol{x}_{pa(j)}, \epsilon_j \\) noise models. Furthermore, we support linear, non-linear and discrete transformations for \\( f(\cdot) \\): 
+`RandomCausalGraphs` supports both additive.
+
+Another try for inline equation: \\( x_j = f(\boldsymbol{x}_{pa(j)}) + \epsilon_j \\) and non-additive \\(x_j = f(\boldsymbol{x}_{pa(j)}, \epsilon_j) \\) noise models. Furthermore, we support linear, non-linear and discrete transformations for \\( f(\cdot) \\): 
 
 - **Linear SEMs**: A linear model with additive noise. The noise variable can be sampled from Gaussian ('gauss'), exponential ('exp'), Gumbel ('gumbel'), uniform ('uniform') distributions.
 - **Non-linear SEMs**: multi-layer perceptron or multiple interaction model. Both have additive noise ('mlp' or 'mim') or non-additive noise versions ('mlp-non-add' or 'mim-non-add') respectively.
