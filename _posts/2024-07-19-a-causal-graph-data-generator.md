@@ -20,7 +20,7 @@ Note this blog post does not intend to be an introduction to causal reasoning. I
 
 - [Causal Reasoning: Fundamentals and Machine Learning Applications](https://causalinference.gitlab.io/): A fantastic resource offering a more formal dive into causal graphs, structural equations, do-calculus, identification of causal estimands, estimation and more.
 
-- [Causal Inference for the Brave and True](https://matheusfacure.github.io/python-causality-handbook/landing-page.html): A light-hearted booklet designed for practitioners.
+- [Causal Inference for the Brave and True](https://matheusfacure.github.io/python-causality-handbook/landing-page.html): A more applied booklet covering a variety of methods for (conditional) effect estimation designed mainly for practitioners.
 
 ## Structural Causal Models (SCMs)
 Let's dive straight into it! Here, I briefly provide some background to facilitate our discussion. In brief, SCMs comprise two key elements: a causal graph and structural equations.
@@ -168,7 +168,7 @@ fitness_int, _, _ = fitness(X_intervened, noise_std=0.1, proportion=0.1, seed=se
 ```
 Ensure you use the same seed when calculating the fitness of both the observational and interventional samples. This consistency guarantees that the subset of variables used in the calculations matches. 
 
-You can find the `fitness` function implementation in the `utils.py` file on GitHub [here](https://github.com/simeon-spasov/RandomCausalGraphs/blob/main/src/utils.py#L52). Feel free to substitute with your own implementation.
+You can find the `fitness` function implementation in the `utils.py` file on GitHub [here](https://github.com/simeon-spasov/RandomCausalGraphs/blob/main/src/utils.py#L1). Feel free to substitute with your own implementation.
 
 ### The Average Causal Effect
 
@@ -187,5 +187,7 @@ ATE = np.mean(fitness_int - fitness_obs)
 
 ## Last Words and What's next
 Feel free to modify the 'RandomCausalGraphs' so it suits your needs!
+
+See code for this post  [here](https://github.com/simeon-spasov/RandomCausalGraphs/blob/main/example.ipynb).
 
 Stay tuned for next post on how to use the package to simulate gene knockout experiments. ETA: Aug. 2024.
